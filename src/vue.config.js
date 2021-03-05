@@ -3,7 +3,7 @@ module.exports = {
     reslove: {
       extendsions: [],
       alias: {
-        
+        'assets' : 'src/assets'
       }
     }
   }
