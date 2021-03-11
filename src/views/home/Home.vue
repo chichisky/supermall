@@ -36,7 +36,7 @@ import FeatureView from "./childComps/FeatureView.vue";
 import TabControl from "../../components/content/tabControl/TabControl.vue";
 import GoodsList from "../../components/content/goods/GoodsList";
 import Scroll from "../../scroll/Scroll.vue";
-import BackTop from '../../components/content/backTop/BackTop.vue';
+import {backTopMixin} from '@/common/mixin'
 
 export default {
   name: "Home",
@@ -48,8 +48,8 @@ export default {
     TabControl,
     GoodsList,
     Scroll,
-    BackTop,
   },
+  mixins: [backTopMixin],
   data() {
     return {
       banners: [],
@@ -61,7 +61,6 @@ export default {
         sell: { page: 0, list: [] },
       },
       currentType: "pop",
-      isBackShow: false,
       tabControlTop: null,
       isTabShow: false,
       saveY: 0
@@ -72,6 +71,7 @@ export default {
       return this.goods[this.currentType].list;
     },
   },
+  
   created() {
     // 1.请求多个数据
     this.getHomeMultidata();
@@ -105,9 +105,6 @@ export default {
       }
       this.$refs.tabControl1.currentIndex = index
       this.$refs.tabControl2.currentIndex = index
-    },
-    backClick(){
-      this.$refs.scroll.scrollTo(0, 0, 500)
     },
     contentScroll(position){
       // 1.确定BackTop是否显示

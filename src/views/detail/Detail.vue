@@ -21,7 +21,8 @@
       <detail-comment-info :comment-info="commentInfo" ref="comment" />
       <goods-list :goods="recommends" ref="recommend" />
     </scroll>
-    <detail-bottom-bar class="bottom-bar" />
+    <detail-bottom-bar class="bottom-bar" @addToCart="addToCart" />
+    <back-top @click="backClick" v-show="isBackShow" class="back-top" />
   </div>
 </template>
 
@@ -38,6 +39,7 @@ import DetailCommentInfo from "./childComps/DetailCommentInfo";
 import GoodsList from "../../components/content/goods/GoodsList.vue";
 import DetailNavBar from "./childComps/DetailNavBar.vue";
 import DetailBottomBar from './childComps/DetailBottomBar.vue';
+import {backTopMixin} from '@/common/mixin';
 export default {
   name: "Detail",
   data() {
@@ -53,8 +55,10 @@ export default {
       themeTopYs: [], // 记录滚动y轴坐标
       getThemeTopY: null, // 防抖函数
       currentIndex: 0,
+      product: {}
     };
   },
+  mixins: [backTopMixin],
   components: {
     DetailSwiper,
     DetailBaseInfo,
@@ -73,6 +77,7 @@ export default {
     // 2.获取详情页数据
     getDetail(this.iid).then((res) => {
       const data = res.result;
+      // console.log(data);
       // 1.获取顶部的图片详情数据
       this.topImages = data.itemInfo.topImages;
       // 2.获取商品信息
@@ -108,14 +113,14 @@ export default {
       this.themeTopYs.push(this.$refs.comment.$el.offsetTop - 44);
       this.themeTopYs.push(this.$refs.recommend.$el.offsetTop - 44);
       this.themeTopYs.push(Number.MAX_VALUE); // 存入最大值，用于边界条件判断
-      console.log(this.themeTopYs);
+      // console.log(this.themeTopYs);
     }, 100);
     })
   },
   methods: {
     imageLoad() {
       this.$refs.scroll.refresh();
-      console.log("------------------------");
+      // console.log("------------------------");
       this.getThemeTopY();
     },
     tabClick(index) {
@@ -135,7 +140,18 @@ export default {
           this.$refs.nav.currentIndex = this.currentIndex;
         }
       }
+      // 2.确定BackTop是否显示
+      this.isBackShow = (-position.y) > 1000
     },
+    addToCart () {
+      this.product.iid = this.iid
+      this.product.img = this.topImages[0]
+      this.product.title = this.goods.title
+      this.product.desc = this.goods.desc
+      this.product.newPrice = this.goods.realPrice
+      this.$store.commit('addCart',this.product)
+      console.log(this.$store.state.product);
+    }
   },
 };
 </script>
