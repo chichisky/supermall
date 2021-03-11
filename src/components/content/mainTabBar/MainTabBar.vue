@@ -1,5 +1,5 @@
 <template>
-  <div id="main-tab-bar">
+  <div>
     <tab-bar>
       <template #default>
         <tab-bar-item path="/home">
@@ -51,8 +51,8 @@ export default {
   name: "MainTabBar",
   components: {
     TabBar,
-    TabBarItem,
-  },
+    TabBarItem
+  }
 };
 </script>
 

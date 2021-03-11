@@ -9,7 +9,6 @@
   --font-size: 14px;
   --line-height: 1.5;
 }
-
 *,
 *::before,
 *::after {
@@ -37,17 +36,17 @@ a {
   text-decoration: none;
 }
 
-.clear-fix:after {
-  visibility: hidden;
+.clear-fix::after {
   clear: both;
-  display: block;
   content: '';
+  display: block;
   width: 0;
   height: 0;
+  visibility: hidden;
 }
 
 .clear-fix {
-  *zoom: 1;
+  zoom: 1;
 }
 
 .left {

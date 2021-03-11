@@ -5,11 +5,11 @@
 </template>
 
 <script>
+
 export default {
   name: 'Categroy'
 }
 </script>
 
 <style>
-
 </style>
