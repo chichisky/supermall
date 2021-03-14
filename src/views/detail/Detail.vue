@@ -23,6 +23,7 @@
     </scroll>
     <detail-bottom-bar class="bottom-bar" @addToCart="addToCart" />
     <back-top @click="backClick" v-show="isBackShow" class="back-top" />
+    <toast :message="message" :isShow="isShow" />
   </div>
 </template>
 
@@ -33,13 +34,14 @@ import DetailSwiper from "./childComps/DetailSwiper.vue";
 import DetailBaseInfo from "./childComps/DetailBaseInfo.vue";
 import DetailShopInfo from "./childComps/DetailShopInfo.vue";
 import DetailGoodsInfo from "./childComps/DetailGoodsInfo.vue";
-import Scroll from "../../scroll/Scroll.vue";
+import Scroll from "../../components/common/scroll/Scroll.vue";
 import DetailParamInfo from "./childComps/DetailParamInfo.vue";
 import DetailCommentInfo from "./childComps/DetailCommentInfo";
 import GoodsList from "../../components/content/goods/GoodsList.vue";
 import DetailNavBar from "./childComps/DetailNavBar.vue";
 import DetailBottomBar from './childComps/DetailBottomBar.vue';
 import {backTopMixin} from '@/common/mixin';
+import Toast from '@/components/common/toast/Toast'
 export default {
   name: "Detail",
   data() {
@@ -55,7 +57,9 @@ export default {
       themeTopYs: [], // 记录滚动y轴坐标
       getThemeTopY: null, // 防抖函数
       currentIndex: 0,
-      product: {}
+      product: {},
+      isShow: false,
+      message: '',
     };
   },
   mixins: [backTopMixin],
@@ -70,6 +74,7 @@ export default {
     GoodsList,
     DetailNavBar,
     DetailBottomBar,
+    Toast,
   },
   created() {
     // 1.保存传入的iid
@@ -149,8 +154,17 @@ export default {
       this.product.title = this.goods.title
       this.product.desc = this.goods.desc
       this.product.newPrice = this.goods.realPrice
-      this.$store.commit('addCart',this.product)
-      console.log(this.$store.state.product);
+      // 添加到购物车
+      this.$store.dispatch('addCart',this.product).then(res =>{
+        console.log(res);
+        this.message = res;
+        this.isShow = true;
+        setTimeout(() => {
+          this.isShow = false;
+          this.message = '';
+        },1500)
+      })
+      // console.log(this.$store.state.cartList);
     }
   },
 };

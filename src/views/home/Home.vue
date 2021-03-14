@@ -35,7 +35,7 @@ import { getHomeMultidata, getHomeGoods } from "@/network/home";
 import FeatureView from "./childComps/FeatureView.vue";
 import TabControl from "../../components/content/tabControl/TabControl.vue";
 import GoodsList from "../../components/content/goods/GoodsList";
-import Scroll from "../../scroll/Scroll.vue";
+import Scroll from "../../components/common/scroll/Scroll.vue";
 import {backTopMixin} from '@/common/mixin'
 
 export default {
