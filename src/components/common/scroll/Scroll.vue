@@ -28,6 +28,12 @@ export default {
       type: Boolean,
       default: false,
     },
+    data: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
   },
   data() {
     return {
@@ -57,6 +63,11 @@ export default {
       });
     }
   },
+  watch: {
+    data() {
+      setTimeout(this.refresh, 20)
+    }
+  },
   methods: {
     scrollTo(x, y, time) {
       this.scroll && this.scroll.scrollTo(x, y, time);
@@ -71,7 +82,7 @@ export default {
       this.scroll && this.scroll.refresh()
     }
   },
-};
+}
 </script>
 
 <style>

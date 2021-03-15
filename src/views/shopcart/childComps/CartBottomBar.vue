@@ -48,31 +48,33 @@ export default {
   height: 40px;
   background-color: #eee;
   position: fixed;
-  bottom: 49px;
+  bottom: 60px;
   left: 0;
   right: 0;
   display: flex;
   font-size: 14px;
+  line-height: 40px;
 }
 .check-content {
-  padding: 10px;
   height: 20px;
   display: flex;
   width: 80px;
 }
 .check-content span {
-  padding: 0 5px;
+  padding-left: 40px;
 }
 .check-button {
-  width: 20px;
+  position: absolute;
+  line-height: 0;
+  left: 12px;
+  top: 10px;
   height: 20px;
+  width: 20px;
 }
 .price {
-  margin: 10px;
   flex: 1;
 }
 .right {
-  padding: 10px;
   text-align: center;
   background-color: var(--color-high-text);
   width: 100px;

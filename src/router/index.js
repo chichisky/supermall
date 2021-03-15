@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 const Home = () => import('../views/home/Home.vue')
-const Categroy = () => import('../views/categroy/Categroy.vue')
+const Category = () => import('../views/category/Category.vue')
 const Shopcart = () => import('../views/shopcart/Shopcart.vue')
 const Profile = () => import('../views/profile/Profile.vue')
 const Detail = () => import('../views/detail/Detail.vue')
@@ -15,8 +15,8 @@ const routes = [
     component: Home
   },
   {
-    path: '/categroy',
-    component: Categroy
+    path: '/category',
+    component: Category
   },
   {
     path: '/shopcart',

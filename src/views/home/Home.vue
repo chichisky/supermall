@@ -1,10 +1,13 @@
 <template>
   <div id="home">
+    <!-- 首页顶部导航栏 -->
     <nav-bar class="home-nav"><template #center>购物街</template>></nav-bar>
+    <!-- 狸猫换太子，实现吸附效果 -->
     <tab-control :titles="titles" 
                  @tabClick="tabClick"
                  ref="tabControl2" 
                  v-show="isTabShow"/>
+    <!-- Scroll添加滚动 -->
     <scroll class="content"
             ref="scroll" 
             :probe-type="3" 
@@ -12,16 +15,22 @@
             :pull-up-load="true" 
             @pullingUp="loadMore"
             :observeImage="true">
+      <!-- 轮播图 -->
       <home-swiper :banners="banners" 
                    @swiperImageLoad="swiperImageLoad" />
+      <!-- 推荐组件 -->
       <home-recommend-view :recommends="recommends" />
+      <!-- 本周流行 -->
       <feature-view />
+      <!-- 分类导航栏 -->
       <tab-control :titles="titles" 
                    @tabClick="tabClick"
                    ref="tabControl1" 
                    v-show="!isTabShow"/>
+      <!-- 商品展示 -->
       <goods-list :goods="showGoods" />
     </scroll>
+    <!-- 回到顶部按钮 -->
     <back-top @click="backClick" v-show="isBackShow" />
   </div>
 </template>
@@ -80,9 +89,11 @@ export default {
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
   },
+  // 回到定位位置
   activated () {
     this.$refs.scroll.scrollTo(0, this.saveY, 0)
   },
+  // 记录离开首页此时的高度
   deactivated () {
     this.saveY = this.$refs.scroll.getScrollY()
   },
@@ -111,13 +122,13 @@ export default {
       this.isBackShow = (-position.y) > 1000
 
       // 2.确定TabControl是否吸顶
-      this.isTabShow = (-position.y) > this.tabControlTop
+      this.isTabShow = (-position.y) > this.tabControlTop - 44
     },
     loadMore(){
       this.getHomeGoods(this.currentType)
     },
     swiperImageLoad(){
-      this.tabControlTop = this.$refs.tabControl1.$el.offsetTop - 44
+      this.tabControlTop = this.$refs.tabControl1.$el.offsetTop
     },
 
     /**
@@ -159,6 +170,6 @@ export default {
 }
 .content {
   overflow: hidden;
-  height: calc(100% - 93px);
+  height: calc(100% - 84px);
 }
 </style>

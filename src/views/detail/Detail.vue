@@ -1,6 +1,8 @@
 <template>
   <div class="detail">
+    <!-- 详情页顶部导航 -->
     <detail-nav-bar class="detail-nav" @tabClick="tabClick" ref="nav" />
+    <!-- 滚动 -->
     <scroll
       class="content"
       ref="scroll"
@@ -9,20 +11,30 @@
       :observeDOM="true"
       @scroll="contentScroll"
     >
+      <!-- 详情页轮播图 -->
       <detail-swiper :top-images="topImages" />
+      <!-- 商品基本信息 -->
       <detail-base-info :goods="goods" />
+      <!-- 店铺信息 -->
       <detail-shop-info :shop="shopInfo" />
+      <!-- 图片展示 -->
       <detail-goods-info
         :detail-info="detailInfo"
         @imageLoad="imageLoad"
         class="goods-info"
       />
+      <!-- 尺码信息 -->
       <detail-param-info :param-info="paramInfo" ref="params" />
+      <!-- 评论 -->
       <detail-comment-info :comment-info="commentInfo" ref="comment" />
+      <!-- 推荐 -->
       <goods-list :goods="recommends" ref="recommend" />
     </scroll>
+    <!-- 底部导航 -->
     <detail-bottom-bar class="bottom-bar" @addToCart="addToCart" />
+    <!-- 回到顶部按钮 -->
     <back-top @click="backClick" v-show="isBackShow" class="back-top" />
+    <!-- 弹窗 -->
     <toast :message="message" :isShow="isShow" />
   </div>
 </template>
@@ -135,7 +147,7 @@ export default {
       const positionY = -position.y;
       const length = this.themeTopYs.length;
       for (let i = 0; i < length - 1; i++) {
-        // 判断做法二、 hack
+        // 判断做法、 hack
         if (
           this.currentIndex !== i &&
           positionY >= this.themeTopYs[i] &&

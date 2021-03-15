@@ -77,12 +77,12 @@ export default {
   line-height: 58px;
 }
 .cart {
-  height: 52px;
+  height: 58px;
   background-color: #ffe817;
   color: #333;
 }
 .buy {
-  height: 52px;
+  height: 58px;
   background-color: #f69;
 }
 </style>

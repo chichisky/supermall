@@ -11,7 +11,7 @@
           </template>
           <template #item-text><div>首页</div></template>
         </tab-bar-item>
-        <tab-bar-item path="/categroy">
+        <tab-bar-item path="/category">
           <template #item-icon>
             <img src="@/assets/img/tabbar/category.svg" />
           </template>
