@@ -1,5 +1,5 @@
 <template>
-    <scroll id="tab-menu">
+    <scroll id="tab-menu" :observeDOM="true">
     <div class="menu-list">
       <div class="menu-list-item"
            :class="{active: index===currentIndex}"
@@ -39,10 +39,13 @@ export default {
 <style scoped>
   #tab-menu {
     background-color: #f6f6f6;
+    height: 100%;
     width: 100px;
-    overflow: hidden;
-    height: 100vh;
+    /* overflow: hidden; */
     box-sizing: border-box;
+  }
+  .menu-list {
+    padding-bottom: 14px;
   }
   .menu-list-item {
     height: 45px;
