@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <!-- 首页顶部导航栏 -->
-    <nav-bar class="home-nav"><template #center>购物街</template>></nav-bar>
+    <nav-bar class="home-nav"><template #center>购物街</template></nav-bar>
     <!-- 狸猫换太子，实现吸附效果 -->
     <tab-control :titles="titles" 
                  @tabClick="tabClick"
@@ -148,6 +148,7 @@ export default {
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
         this.$refs.scroll.finishPullUp()
+        // console.log(this.goods[type].list);
       });
     },
   },

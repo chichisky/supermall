@@ -9,7 +9,7 @@
 	export default {
 		name: "GridView",
     props: {
-        cols: {
+      cols: {
         type: Number,
         default: 2
       },
@@ -46,7 +46,7 @@
         // 2.设置gridEl的内边距
         gridEl.style.padding = `${this.vMargin}px ${this.hMargin}px`
         // 3.计算item的宽度
-        let itemWidth = (gridEl.clientWidth - 2 * this.hMargin - (this.cols - 1) * this.itemSpace) / this.cols;
+        let itemWidth = (gridEl.clientWidth - 2 * this.hMargin - (this.cols) * this.itemSpace) / this.cols;
         for (let i = 0; i < children.length; i++) {
           let item = children[i];
           item.style.width = itemWidth + 'px';

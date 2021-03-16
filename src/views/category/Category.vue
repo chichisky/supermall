@@ -1,8 +1,6 @@
 <template>
   <div id="category">
-    <nav-bar class="category-nav"
-      ><template #center>商品分类</template></nav-bar
-    >
+    <nav-bar class="category-nav"><template #center>商品分类</template></nav-bar>
     <div class="content">
       <tab-menu :categories="categories" @selectItem="selectItem"
                 class="tab-menu"></tab-menu>
@@ -11,7 +9,7 @@
         <div>
           <tab-content-category :subcategories="showSubcategory"></tab-content-category>
           <tab-control :titles="['综合', '新品', '销量']"
-                       @itemClick="tabClick"></tab-control>
+                       @tabClick="tabClick"></tab-control>
           <tab-content-detail :category-detail="showCategoryDetail"></tab-content-detail>
         </div>
       </scroll>
@@ -25,7 +23,6 @@ import Scroll from '@/components/common/scroll/Scroll'
 import TabControl from "../../components/content/tabControl/TabControl"
 import TabContentCategory from "./childComps/TabContentCategory"
 import TabContentDetail from "./childComps/TabContentDetail"
-
 import {
   getCategory,
   getSubcategory,
@@ -45,8 +42,9 @@ export default {
   data () {
     return {
       categories: [],
-      categoryData: {},
-      currentIndex: -1
+      categoryData: [],
+      currentIndex: -1,
+      currentType: 'pop',
     }
   },
   created() {
@@ -70,6 +68,7 @@ export default {
       getCategory().then((res) => {
         // 1.获取分类数据
         this.categories = res.data.category.list;
+        // console.log(this.categories);
         // 2.初始化每个类别的子数据
         for (let i = 0; i < this.categories.length; i++) {
           this.categoryData[i] = {
@@ -90,10 +89,11 @@ export default {
       const mailKey = this.categories[index].maitKey;
       getSubcategory(mailKey).then((res) => {
         this.categoryData[index].subcategories = res.data;
-        this.categoryData = { ...this.categoryData };
+        this.categoryData = { ...this.categoryData };   
         this._getCategoryDetail('pop');
         this._getCategoryDetail('new');
         this._getCategoryDetail('sell');
+        // console.log(this.categoryData);
       });
     },
     _getCategoryDetail(type) {
@@ -109,6 +109,20 @@ export default {
     /**
      * 事件响应相关的方法
      */
+     tabClick(index) {
+      switch (index) {
+        case 0:
+          this.currentType = 'pop'
+          break
+        case 1:
+          this.currentType = 'new'
+          break
+        case 2:
+          this.currentType = 'sell'
+          break
+      }
+      // console.log(this.currentType);
+    },
     selectItem(index) {
       this._getSubcategories(index);
     },
