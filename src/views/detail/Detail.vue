@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
     <!-- 详情页顶部导航 -->
-    <detail-nav-bar class="detail-nav" @tabClick="tabClick" ref="nav" />
+    <detail-nav-bar class="detail-nav" @tabClick="tabClick" ref="nav"/>
     <!-- 滚动 -->
     <scroll
       class="content"
@@ -9,8 +9,7 @@
       :probe-type="3"
       :observeImage="true"
       :observeDOM="true"
-      @scroll="contentScroll"
-    >
+      @scroll="contentScroll" >
       <!-- 详情页轮播图 -->
       <detail-swiper :top-images="topImages" />
       <!-- 商品基本信息 -->
@@ -72,6 +71,7 @@ export default {
       product: {},
       isShow: false,
       message: '',
+      detail_nav: 0
     };
   },
   mixins: [backTopMixin],
@@ -130,8 +130,8 @@ export default {
       this.themeTopYs.push(this.$refs.comment.$el.offsetTop - 44);
       this.themeTopYs.push(this.$refs.recommend.$el.offsetTop - 44);
       this.themeTopYs.push(Number.MAX_VALUE); // 存入最大值，用于边界条件判断
-      // console.log(this.themeTopYs);
-    }, 100);
+      console.log(this.themeTopYs);
+    }, 200);
     })
   },
   methods: {

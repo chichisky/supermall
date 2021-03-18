@@ -30,7 +30,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['cartLength', 'totalCount'] )
+    ...mapGetters(['cartLength', 'totalCount'] ),
+
   },
   methods: {
     cartBuy() {

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <router-view v-slot="{ Component }">
       <keep-alive exclude="Detail">
         <component :is="Component" />

@@ -1,32 +1,37 @@
 <template>
-  <div id="home">
+  <div id="home" class="wrapper">
     <!-- 首页顶部导航栏 -->
     <nav-bar class="home-nav"><template #center>购物街</template></nav-bar>
     <!-- 狸猫换太子，实现吸附效果 -->
-    <tab-control :titles="titles" 
-                 @tabClick="tabClick"
-                 ref="tabControl2" 
-                 v-show="isTabShow"/>
+    <tab-control
+      :titles="titles"
+      @tabClick="tabClick"
+      ref="tabControl2"
+      v-show="isTabShow"
+    />
     <!-- Scroll添加滚动 -->
-    <scroll class="content"
-            ref="scroll" 
-            :probe-type="3" 
-            @scroll="contentScroll" 
-            :pull-up-load="true" 
-            @pullingUp="loadMore"
-            :observeImage="true">
+    <scroll
+      class="content"
+      ref="scroll"
+      :probe-type="3"
+      @scroll="contentScroll"
+      :pull-up-load="true"
+      @pullingUp="loadMore"
+      :observeImage="true"
+    >
       <!-- 轮播图 -->
-      <home-swiper :banners="banners" 
-                   @swiperImageLoad="swiperImageLoad" />
+      <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad" :key="home_swiper" />
       <!-- 推荐组件 -->
       <home-recommend-view :recommends="recommends" />
       <!-- 本周流行 -->
       <feature-view />
       <!-- 分类导航栏 -->
-      <tab-control :titles="titles" 
-                   @tabClick="tabClick"
-                   ref="tabControl1" 
-                   v-show="!isTabShow"/>
+      <tab-control
+        :titles="titles"
+        @tabClick="tabClick"
+        ref="tabControl1"
+        v-show="!isTabShow"
+      />
       <!-- 商品展示 -->
       <goods-list :goods="showGoods" />
     </scroll>
@@ -72,7 +77,8 @@ export default {
       currentType: "pop",
       tabControlTop: null,
       isTabShow: false,
-      saveY: 0
+      saveY: 0,
+      home_swiper : 0
     };
   },
   computed: {
@@ -96,6 +102,11 @@ export default {
   // 记录离开首页此时的高度
   deactivated () {
     this.saveY = this.$refs.scroll.getScrollY()
+  },
+  mounted() {
+    setTimeout(() => {
+      this.forceRerender()
+    },400)
   },
   methods: {
     /**
@@ -130,7 +141,9 @@ export default {
     swiperImageLoad(){
       this.tabControlTop = this.$refs.tabControl1.$el.offsetTop
     },
-
+    forceRerender() {
+      this.home_swiper += 1; 
+    },
     /**
      * 关于网络请求的方法
      *
@@ -156,7 +169,7 @@ export default {
 </script>
 
 <style scoped>
-#home {
+.wrapper {
   height: 100vh;
 }
 .home-nav {
