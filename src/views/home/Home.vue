@@ -175,6 +175,7 @@ export default {
 .home-nav {
   background-color: var(--color-tint);
   color: #fff;
+  font-weight: 700;
   /* 为了在使用原生滚动时，导航栏不随着内容滚动 */
   /* position: fixed;
   top: 0;

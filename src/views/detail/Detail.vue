@@ -196,6 +196,7 @@ export default {
   position: relative;
   z-index: 9;
   background-color: #fff;
+  font-weight: 700;
 }
 .content {
   height: calc(100% - 102px);

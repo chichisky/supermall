@@ -8,5 +8,7 @@ module.exports = {
       .set('@', resolve('src'))
       .set('assets', resolve('@/assets'))
       .set('components', resolve('@/components'))
-      .set('views', resolve('@/views'))
+      .set('views', resolve('@/views'));
+    //排除icons目录中svg文件处理
   },
+}
