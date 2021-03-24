@@ -6,7 +6,7 @@ module.exports = {
       viewportHeight: 667, // 视窗的高度 （也可以不配置）
       unitPrecision: 5, // 指定'px'转化为视窗单位值的小数位数（很多时候无法整除）
       viewportUnit: 'vw', // 指定需要转换成的视窗单位，建议使用vw
-      selectorBlackList: ['ignore', 'tab-bar', 'tab-bar-item'], //指定不需要转化的类
+      selectorBlackList: ['ignore'], //指定不需要转化的类
       minPixelValue: 1, // 小于或等于`1px`不转化未视窗单位
       mediaQuery: false // 允许在媒体查询中转换`px`
     }

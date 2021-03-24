@@ -48,7 +48,7 @@ export default {
   height: 40px;
   background-color: #eee;
   position: fixed;
-  bottom: 54px;
+  bottom: 50px;
   left: 0;
   right: 0;
   display: flex;
